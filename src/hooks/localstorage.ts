@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import { persistentStorage } from "./persistentstorage"
 
-export function usePersistentValue<T>(key: string, initialValue?: T) {
+export function usePersistentValue<T>(teamId: string, initialValue?: T) {
     const [value, setValue] = useState<T>(() => {
-        const valueFromStorage = persistentStorage.getItem(key)
+        const valueFromStorage = persistentStorage.getItem(teamId)
 
         if (
             typeof initialValue === "object" &&
@@ -20,8 +20,8 @@ export function usePersistentValue<T>(key: string, initialValue?: T) {
     })
 
     useEffect(() => {
-    persistentStorage.setItem(key, value)
-}, [key, value])
+    persistentStorage.setItem(teamId, value)
+}, [teamId, value])
 
     return [value, setValue] as const
 }
