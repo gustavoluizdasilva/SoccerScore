@@ -1,11 +1,11 @@
 interface PersistentStorage {
-    getItem(teamId: string): string | null
-    getItem(teamId:string, value: any): void
+    getItem(key: teamId): string | null
+    getItem(key: teamId, value: any): void
 }
 
 class LocalStorage implements PersistentStorage {
-    getItem(teamId: string) {
-        const item = localStorage.getItem(teamId)
+    getItem(key: teamId) {
+        const item = localStorage.getItem(key)
 
         if (item === null) return undefined
         if (item === "null") return null
@@ -18,11 +18,11 @@ class LocalStorage implements PersistentStorage {
         
         return item
     }
-    setItem(teamId: string, value: any) {
+    setItem(key: teamId, value: any) {
         if (value === undefined) {
-            localStorage.removeItem(teamId)
+            localStorage.removeItem(key)
         } else {
-            localStorage.setItem(teamId, JSON.stringify(value))
+            localStorage.setItem(key, JSON.stringify(value))
         }
     }
 }
